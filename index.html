@@ -1,64 +1,1439 @@
-from pathlib import Path
-import re, zipfile
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Naruse Dental Clinic — thoughtful dentistry, quietly refined. Pondok Candra, Sidoarjo.">
+  <title>Naruse Dental Clinic</title>
 
-path = Path("/mnt/data/index.html")
-html = path.read_text(encoding="utf-8")
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-# Replace the three logo SVG variants with a cleaner, upright, symmetrical mark.
-header_logo = '''<svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
-  <path d="M27 29C20 38 21 49 24 59C27 70 30 86 39 87C47 88 49 70 50 65C51 70 53 88 61 87C70 86 73 70 76 59C79 49 80 38 73 29C67 21 58 21 50 26C42 21 33 21 27 29Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
-  <path d="M18 43C30 49 43 51 57 48C67 46 76 41 83 35" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-  <path d="M78 16L79.5 20.5L84 22L79.5 23.5L78 28L76.5 23.5L72 22L76.5 20.5L78 16Z" fill="currentColor"/>
-</svg>'''
+  <style>
+    :root {
+      --cream: #f7f3ec;
+      --paper: #fcfaf6;
+      --ink: #30332f;
+      --muted: #74766f;
+      --line: #ddd8ce;
+      --sage: #727d72;
+      --white: #fffdf9;
+    }
 
-large_logo = '''<svg class="hero-tooth" viewBox="0 0 240 240" fill="none" aria-hidden="true">
-  <path d="M70 66C57 82 59 103 64 120C69 138 74 174 91 177C108 180 112 145 120 136C128 145 132 180 149 177C166 174 171 138 176 120C181 103 183 82 170 66C157 50 139 51 120 62C101 51 83 50 70 66Z" stroke="#73786e" stroke-width="3.2" stroke-linejoin="round"/>
-  <path d="M48 93C73 106 101 108 128 101C149 96 169 86 190 72" stroke="#73786e" stroke-width="3.2" stroke-linecap="round"/>
-  <path d="M183 44L186 52L194 55L186 58L183 66L180 58L172 55L180 52L183 44Z" fill="#73786e"/>
-</svg>'''
+    * {
+      box-sizing: border-box;
+    }
 
-about_logo = '''<svg viewBox="0 0 240 240" fill="none" aria-hidden="true">
-  <path d="M70 66C57 82 59 103 64 120C69 138 74 174 91 177C108 180 112 145 120 136C128 145 132 180 149 177C166 174 171 138 176 120C181 103 183 82 170 66C157 50 139 51 120 62C101 51 83 50 70 66Z" stroke="#73786e" stroke-width="3" stroke-linejoin="round"/>
-  <path d="M48 93C73 106 101 108 128 101C149 96 169 86 190 72" stroke="#73786e" stroke-width="3" stroke-linecap="round"/>
-  <path d="M183 44L186 52L194 55L186 58L183 66L180 58L172 55L180 52L183 44Z" fill="#73786e"/>
-</svg>'''
+    html {
+      scroll-behavior: smooth;
+    }
 
-# First SVG after brand opening
-html = re.sub(
-    r'<svg viewBox="0 0 100 100" fill="none" aria-hidden="true">.*?</svg>',
-    header_logo,
-    html,
-    count=1,
-    flags=re.S
-)
-# Hero SVG
-html = re.sub(
-    r'<svg class="hero-tooth" viewBox="0 0 240 240" fill="none" aria-hidden="true">.*?</svg>',
-    large_logo,
-    html,
-    count=1,
-    flags=re.S
-)
-# About SVG: first remaining 240x240 SVG
-html = re.sub(
-    r'<svg viewBox="0 0 240 240" fill="none" aria-hidden="true">.*?</svg>',
-    about_logo,
-    html,
-    count=1,
-    flags=re.S
-)
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "DM Sans", sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+    }
 
-# Ensure the hero mark itself cannot be visually rotated/skewed.
-html = html.replace(
-    '.hero-tooth{position:relative;',
-    '.hero-tooth{position:relative;transform:none;'
-)
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-path.write_text(html, encoding="utf-8")
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(252,250,246,.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(221,216,206,.7);
+    }
 
-zip_path = Path("/mnt/data/naruse-dental-website-fixed-logo.zip")
-with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
-    z.write(path, arcname="index.html")
+    .nav {
+      max-width: 1180px;
+      margin: auto;
+      padding: 15px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
 
-print("Logo sudah diluruskan dan file website versi terbaru dibuat.")
-print(zip_path)
+    /* =========================
+       LOGO
+    ========================= */
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 190px;
+    }
+
+    .brand svg {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 25px;
+      letter-spacing: .17em;
+      line-height: 1;
+    }
+
+    .brand-sub {
+      font-size: 8px;
+      letter-spacing: .20em;
+      margin-top: 5px;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-size: 12px;
+      color: #666960;
+    }
+
+    nav a:hover {
+      color: var(--ink);
+    }
+
+    .nav-social {
+      display: flex;
+      gap: 13px;
+      align-items: center;
+    }
+
+    .nav-social a {
+      font-size: 11px;
+      letter-spacing: .05em;
+    }
+
+    /* =========================
+       BUTTON
+    ========================= */
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 12px 21px;
+      border: 1px solid var(--sage);
+      border-radius: 999px;
+      font-size: 12px;
+      transition: .25s ease;
+    }
+
+    .button.primary {
+      background: var(--sage);
+      color: white;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(60,65,58,.10);
+    }
+
+    /* =========================
+       GENERAL
+    ========================= */
+
+    section {
+      max-width: 1180px;
+      margin: auto;
+      padding: 90px 28px;
+    }
+
+    .eyebrow {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .25em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow:after {
+      content: "";
+      width: 48px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 400;
+      margin: 0;
+      line-height: 1.05;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      max-width: none;
+      min-height: 650px;
+      padding: 72px max(28px, calc((100% - 1180px)/2));
+      display: grid;
+      grid-template-columns: 1fr .9fr;
+      align-items: center;
+      gap: 70px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(214,208,195,.34), transparent 28%),
+        var(--cream);
+    }
+
+    .hero h1 {
+      font-size: clamp(54px, 6.4vw, 88px);
+      max-width: 650px;
+      letter-spacing: -.025em;
+    }
+
+    .hero-copy {
+      max-width: 520px;
+      color: #686b63;
+      font-size: 15px;
+      margin: 26px 0 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* =========================
+       HERO DENTAL ART
+    ========================= */
+
+    .hero-art {
+      min-height: 430px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-art:before {
+      content: "";
+      width: 390px;
+      height: 390px;
+      border: 1px solid #d7d1c5;
+      border-radius: 48% 52% 45% 55%;
+      transform: rotate(-12deg);
+      position: absolute;
+    }
+
+    .hero-art:after {
+      content: "";
+      width: 300px;
+      height: 300px;
+      border: 1px solid #e2ddd4;
+      border-radius: 52% 48% 56% 44%;
+      transform: rotate(17deg);
+      position: absolute;
+    }
+
+    .hero-tooth {
+      position: relative;
+      z-index: 2;
+      width: 230px;
+      height: 230px;
+      opacity: .76;
+      transform: none;
+    }
+
+    .spark {
+      position: absolute;
+      z-index: 3;
+      top: 70px;
+      right: 95px;
+      font-size: 27px;
+      color: #8a8c83;
+    }
+
+    .jp {
+      position: absolute;
+      writing-mode: vertical-rl;
+      letter-spacing: .35em;
+      font-size: 10px;
+      color: #99998f;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* =========================
+       ABOUT
+    ========================= */
+
+    .about {
+      display: grid;
+      grid-template-columns: .7fr 1fr;
+      gap: 100px;
+      align-items: center;
+    }
+
+    .about-mark {
+      min-height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .about-mark:before {
+      content: "";
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: #eee9df;
+      position: absolute;
+    }
+
+    .about-mark svg {
+      position: relative;
+      width: 190px;
+      height: 190px;
+    }
+
+    .about h2 {
+      font-size: 55px;
+      max-width: 600px;
+    }
+
+    .about p {
+      max-width: 530px;
+      color: var(--muted);
+      margin: 25px 0;
+    }
+
+    /* =========================
+       SERVICES
+    ========================= */
+
+    .services-wrap {
+      background: var(--cream);
+    }
+
+    .services {
+      max-width: 1180px;
+      margin: auto;
+      padding: 85px 28px;
+    }
+
+    .services h2 {
+      font-size: 52px;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 14px;
+      margin-top: 38px;
+    }
+
+    .service {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.32);
+      padding: 27px 22px;
+      min-height: 205px;
+      transition: .25s;
+    }
+
+    .service:hover {
+      transform: translateY(-4px);
+      background: var(--white);
+    }
+
+    .service svg {
+      width: 43px;
+      height: 43px;
+      margin-bottom: 20px;
+    }
+
+    .service h3 {
+      font-size: 25px;
+    }
+
+    .service p {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 9px 0 0;
+    }
+
+    /* =========================
+       CLINIC
+    ========================= */
+
+    .clinic {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .clinic h2 {
+      font-size: 58px;
+    }
+
+    .clinic-info {
+      margin: 28px 0;
+      display: grid;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .clinic-info div {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    /* =========================
+       MAP
+    ========================= */
+
+    .map-card {
+      min-height: 370px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(
+          135deg,
+          transparent 48%,
+          #e2ddd3 49%,
+          #e2ddd3 50%,
+          transparent 51%
+        ),
+        linear-gradient(
+          45deg,
+          transparent 48%,
+          #ebe7df 49%,
+          #ebe7df 50%,
+          transparent 51%
+        ),
+        #f4f0e8;
+      background-size: 110px 110px, 145px 145px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-card:before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border: 1px solid #d6d0c5;
+      border-radius: 50%;
+      top: 55px;
+      left: 80px;
+    }
+
+    .map-pin {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: rgba(114,125,114,.9);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 20px;
+    }
+
+    .map-link {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      background: var(--white);
+      padding: 10px 15px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 11px;
+    }
+
+    /* =========================
+       CTA
+    ========================= */
+
+    .cta {
+      max-width: 1125px;
+      margin: 0 auto 70px;
+      padding: 50px 55px;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta:before {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border: 1px solid #ded8cc;
+      border-radius: 50%;
+      left: -80px;
+      top: -110px;
+    }
+
+    .cta h2 {
+      font-size: 43px;
+      position: relative;
+    }
+
+    .cta p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      position: relative;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 55px 28px 25px;
+      background: var(--paper);
+    }
+
+    .footer-inner {
+      max-width: 1180px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 50px;
+    }
+
+    .footer-brand {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 32px;
+      letter-spacing: .12em;
+    }
+
+    .footer p {
+      font-size: 12px;
+      color: var(--muted);
+      max-width: 280px;
+    }
+
+    .footer h4 {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .2em;
+      font-weight: 500;
+      margin: 0 0 15px;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .copyright {
+      max-width: 1180px;
+      margin: 45px auto 0;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      font-size: 10px;
+      color: #999990;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media(max-width:850px) {
+
+      .nav {
+        padding: 12px 18px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .nav-social {
+        margin-left: auto;
+      }
+
+      .brand {
+        min-width: 0;
+      }
+
+      .brand-name {
+        font-size: 21px;
+      }
+
+      .brand-sub {
+        font-size: 7px;
+      }
+
+      .nav .button {
+        display: none;
+      }
+
+      section {
+        padding: 65px 20px;
+      }
+
+      .hero {
+        padding: 55px 20px 70px;
+        min-height: auto;
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .hero h1 {
+        font-size: 57px;
+      }
+
+      .hero-art {
+        min-height: 310px;
+      }
+
+      .hero-art:before {
+        width: 280px;
+        height: 280px;
+      }
+
+      .hero-art:after {
+        width: 215px;
+        height: 215px;
+      }
+
+      .hero-tooth {
+        width: 165px;
+        height: 165px;
+      }
+
+      .spark {
+        right: 55px;
+        top: 35px;
+      }
+
+      .jp {
+        display: none;
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .about h2,
+      .clinic h2 {
+        font-size: 45px;
+      }
+
+      .about-mark {
+        min-height: 250px;
+      }
+
+      .services {
+        padding: 65px 20px;
+      }
+
+      .services h2 {
+        font-size: 45px;
+      }
+
+      .service-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .clinic {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .map-card {
+        min-height: 280px;
+      }
+
+      .cta {
+        margin: 0 15px 50px;
+        padding: 38px 28px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cta h2 {
+        font-size: 38px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 35px;
+      }
+
+      .footer-inner > :first-child {
+        grid-column: 1/-1;
+      }
+
+      .copyright {
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+
+    @media(max-width:480px) {
+
+      .service-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 49px;
+      }
+
+      .hero-copy {
+        font-size: 14px;
+      }
+
+      .hero-actions .button {
+        width: 100%;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner > :first-child {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+  <div class="nav">
+
+    <a href="#home" class="brand" aria-label="Naruse Dental Clinic">
+
+      <!-- CLEAN SYMMETRICAL LOGO -->
+      <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+
+        <path
+          d="M27 29
+             C20 38 21 49 24 59
+             C27 70 30 86 39 87
+             C47 88 49 70 50 65
+             C51 70 53 88 61 87
+             C70 86 73 70 76 59
+             C79 49 80 38 73 29
+             C67 21 58 21 50 26
+             C42 21 33 21 27 29Z"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linejoin="round"
+        />
+
+        <path
+          d="M18 43
+             C30 49 43 51 57 48
+             C67 46 76 41 83 35"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+        />
+
+        <path
+          d="M78 16
+             L79.5 20.5
+             L84 22
+             L79.5 23.5
+             L78 28
+             L76.5 23.5
+             L72 22
+             L76.5 20.5
+             L78 16Z"
+          fill="currentColor"
+        />
+
+      </svg>
+
+      <div>
+        <div class="brand-name">NARUSE</div>
+        <div class="brand-sub">DENTAL CLINIC · 成瀬歯科医院</div>
+      </div>
+
+    </a>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#clinic">Clinic</a>
+    </nav>
+
+    <div class="nav-social">
+
+      <a
+        href="https://wa.me/6282178276828"
+        target="_blank"
+        rel="noopener"
+      >WA</a>
+
+      <a
+        href="https://www.instagram.com/naruse_dentalclinic/"
+        target="_blank"
+        rel="noopener"
+      >IG</a>
+
+      <a
+        href="https://www.tiktok.com/@naruse_dentalclinic"
+        target="_blank"
+        rel="noopener"
+      >TK</a>
+
+    </div>
+
+    <a
+      class="button primary"
+      href="https://wa.me/6282178276828?text=Halo%20Naruse%20Dental%20Clinic%2C%20saya%20ingin%20membuat%20appointment."
+      target="_blank"
+      rel="noopener"
+    >
+      Book Appointment
+    </a>
+
+  </div>
+</header>
+
+
+<main>
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="home">
+
+  <div>
+
+    <div class="eyebrow">
+      あなたの笑顔のために
+    </div>
+
+    <h1>
+      Healthy smiles,<br>
+      brighter days.
+    </h1>
+
+    <p class="hero-copy">
+      Thoughtful dentistry, quietly refined.
+      A calm and modern dental experience
+      designed around your comfort and smile.
+    </p>
+
+    <div class="hero-actions">
+
+      <a
+        class="button primary"
+        href="https://wa.me/6282178276828?text=Halo%20Naruse%20Dental%20Clinic%2C%20saya%20ingin%20membuat%20appointment."
+        target="_blank"
+        rel="noopener"
+      >
+        Book an Appointment →
+      </a>
+
+      <a
+        class="button"
+        href="https://www.instagram.com/naruse_dentalclinic/"
+        target="_blank"
+        rel="noopener"
+      >
+        Instagram ↗
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- DENTAL LOGO ART -->
+
+  <div class="hero-art">
+
+    <span class="spark">✦</span>
+
+    <span class="jp">
+      美しい笑顔を、ずっと。
+    </span>
+
+    <svg
+      class="hero-tooth"
+      viewBox="0 0 240 240"
+      fill="none"
+      aria-hidden="true"
+    >
+
+      <path
+        d="M70 66
+           C57 82 59 103 64 120
+           C69 138 74 174 91 177
+           C108 180 112 145 120 136
+           C128 145 132 180 149 177
+           C166 174 171 138 176 120
+           C181 103 183 82 170 66
+           C157 50 139 51 120 62
+           C101 51 83 50 70 66Z"
+        stroke="#73786e"
+        stroke-width="3.2"
+        stroke-linejoin="round"
+      />
+
+      <path
+        d="M48 93
+           C73 106 101 108 128 101
+           C149 96 169 86 190 72"
+        stroke="#73786e"
+        stroke-width="3.2"
+        stroke-linecap="round"
+      />
+
+      <path
+        d="M183 44
+           L186 52
+           L194 55
+           L186 58
+           L183 66
+           L180 58
+           L172 55
+           L180 52
+           L183 44Z"
+        fill="#73786e"
+      />
+
+    </svg>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section class="about" id="about">
+
+  <div class="about-mark">
+
+    <svg
+      viewBox="0 0 240 240"
+      fill="none"
+      aria-hidden="true"
+    >
+
+      <path
+        d="M70 66
+           C57 82 59 103 64 120
+           C69 138 74 174 91 177
+           C108 180 112 145 120 136
+           C128 145 132 180 149 177
+           C166 174 171 138 176 120
+           C181 103 183 82 170 66
+           C157 50 139 51 120 62
+           C101 51 83 50 70 66Z"
+        stroke="#73786e"
+        stroke-width="3"
+        stroke-linejoin="round"
+      />
+
+      <path
+        d="M48 93
+           C73 106 101 108 128 101
+           C149 96 169 86 190 72"
+        stroke="#73786e"
+        stroke-width="3"
+        stroke-linecap="round"
+      />
+
+      <path
+        d="M183 44
+           L186 52
+           L194 55
+           L186 58
+           L183 66
+           L180 58
+           L172 55
+           L180 52
+           L183 44Z"
+        fill="#73786e"
+      />
+
+    </svg>
+
+  </div>
+
+
+  <div>
+
+    <div class="eyebrow">
+      About Naruse
+    </div>
+
+    <h2>
+      A calm, modern dental experience.
+    </h2>
+
+    <p>
+      At Naruse Dental Clinic, we believe dental care
+      should feel personal, comfortable, and thoughtfully
+      considered — from your first visit to every smile after.
+    </p>
+
+    <a href="#clinic" class="button">
+      Visit Our Clinic →
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     SERVICES
+========================= -->
+
+<div class="services-wrap">
+
+<section class="services" id="services">
+
+  <div class="eyebrow">
+    Our Services
+  </div>
+
+  <h2>
+    Care for every smile.
+  </h2>
+
+
+  <div class="service-grid">
+
+
+    <!-- SERVICE 1 -->
+
+    <article class="service">
+
+      <svg viewBox="0 0 80 80" fill="none">
+
+        <path
+          d="M23 24
+             C16 34 18 45 21 55
+             C24 66 28 78 36 79
+             C45 80 45 65 50 60
+             C55 65 55 80 64 79
+             C72 78 76 64 79 53
+             C82 42 84 31 77 23
+             C70 15 60 16 50 21
+             C40 16 30 15 23 24Z"
+          stroke="currentColor"
+          stroke-width="2.5"
+        />
+
+      </svg>
+
+      <h3>
+        General Dentistry
+      </h3>
+
+      <p>
+        Comprehensive care for your everyday oral health.
+      </p>
+
+    </article>
+
+
+    <!-- SERVICE 2 -->
+
+    <article class="service">
+
+      <svg viewBox="0 0 80 80" fill="none">
+
+        <path
+          d="M23 24
+             C16 34 18 45 21 55
+             C24 66 28 78 36 79
+             C45 80 45 65 50 60
+             C55 65 55 80 64 79
+             C72 78 76 64 79 53
+             C82 42 84 31 77 23
+             C70 15 60 16 50 21
+             C40 16 30 15 23 24Z"
+          stroke="currentColor"
+          stroke-width="2.5"
+        />
+
+        <path
+          d="M17 38
+             C33 44 49 43 66 31"
+          stroke="currentColor"
+          stroke-width="2.5"
+        />
+
+      </svg>
+
+      <h3>
+        Preventive Care
+      </h3>
+
+      <p>
+        Keep your smile healthy and cared for long term.
+      </p>
+
+    </article>
+
+
+    <!-- SERVICE 3 -->
+
+    <article class="service">
+
+      <svg viewBox="0 0 80 80" fill="none">
+
+        <path
+          d="M23 24
+             C16 34 18 45 21 55
+             C24 66 28 78 36 79
+             C45 80 45 65 50 60
+             C55 65 55 80 64 79
+             C72 78 76 64 79 53
+             C82 42 84 31 77 23
+             C70 15 60 16 50 21
+             C40 16 30 15 23 24Z"
+          stroke="currentColor"
+          stroke-width="2.5"
+        />
+
+        <path
+          d="M32 42
+             C39 46 46 46 53 42"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        />
+
+      </svg>
+
+      <h3>
+        Restorative Dentistry
+      </h3>
+
+      <p>
+        Restore function and renew confidence in your smile.
+      </p>
+
+    </article>
+
+
+    <!-- SERVICE 4 -->
+
+    <article class="service">
+
+      <svg viewBox="0 0 80 80" fill="none">
+
+        <path
+          d="M23 24
+             C16 34 18 45 21 55
+             C24 66 28 78 36 79
+             C45 80 45 65 50 60
+             C55 65 55 80 64 79
+             C72 78 76 64 79 53
+             C82 42 84 31 77 23
+             C70 15 60 16 50 21
+             C40 16 30 15 23 24Z"
+          stroke="currentColor"
+          stroke-width="2.5"
+        />
+
+        <path
+          d="M50 25
+             L52 30
+             L57 32
+             L52 34
+             L50 39
+             L48 34
+             L43 32
+             L48 30
+             L50 25Z"
+          fill="currentColor"
+        />
+
+      </svg>
+
+      <h3>
+        Aesthetic Dentistry
+      </h3>
+
+      <p>
+        Enhance your natural smile with thoughtful care.
+      </p>
+
+    </article>
+
+  </div>
+
+</section>
+
+</div>
+
+
+<!-- =========================
+     CLINIC / LOCATION
+========================= -->
+
+<section class="clinic" id="clinic">
+
+  <div>
+
+    <div class="eyebrow">
+      Our Clinic
+    </div>
+
+    <h2>
+      Pondok Candra, Sidoarjo.
+    </h2>
+
+    <div class="clinic-info">
+
+      <div>
+        ⌖
+        <span>
+          Jl. Taman Lestari RR1-02<br>
+          Pondok Candra, Wadung Asri<br>
+          Sidoarjo, Jawa Timur
+        </span>
+      </div>
+
+      <div>
+        ◷
+        <span>
+          By appointment
+        </span>
+      </div>
+
+      <div>
+        ☎
+        <span>
+          0821 7827 6828
+        </span>
+      </div>
+
+    </div>
+
+
+    <a
+      class="button primary"
+      href="https://www.google.com/maps/search/?api=1&query=Jl.%20Taman%20Lestari%20RR1-02%20Pondok%20Candra%20Wadung%20Asri%20Sidoarjo"
+      target="_blank"
+      rel="noopener"
+    >
+      Open in Google Maps ↗
+    </a>
+
+  </div>
+
+
+  <!-- MAP CARD -->
+
+  <div class="map-card">
+
+    <div class="map-pin">
+      N
+    </div>
+
+    <a
+      class="map-link"
+      href="https://www.google.com/maps/search/?api=1&query=Jl.%20Taman%20Lestari%20RR1-02%20Pondok%20Candra%20Wadung%20Asri%20Sidoarjo"
+      target="_blank"
+      rel="noopener"
+    >
+      View on Maps →
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     FINAL CTA
+========================= -->
+
+<section class="cta">
+
+  <div>
+
+    <h2>
+      Your smile, thoughtfully cared for.
+    </h2>
+
+    <p>
+      あなたの笑顔のために · By appointment
+    </p>
+
+  </div>
+
+
+  <a
+    class="button primary"
+    href="https://wa.me/6282178276828?text=Halo%20Naruse%20Dental%20Clinic%2C%20saya%20ingin%20membuat%20appointment."
+    target="_blank"
+    rel="noopener"
+  >
+    Book an Appointment →
+  </a>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  <div class="footer-inner">
+
+
+    <div>
+
+      <div class="footer-brand">
+        NARUSE
+      </div>
+
+      <div style="font-size:9px;letter-spacing:.25em;color:#8b8d84">
+        DENTAL CLINIC · 成瀬歯科医院
+      </div>
+
+      <p>
+        Modern dental care with a calm,
+        personal and thoughtful approach.
+      </p>
+
+    </div>
+
+
+    <div>
+
+      <h4>
+        Connect
+      </h4>
+
+      <div class="footer-links">
+
+        <a
+          href="https://wa.me/6282178276828"
+          target="_blank"
+          rel="noopener"
+        >
+          WhatsApp · 0821 7827 6828
+        </a>
+
+        <a
+          href="https://www.instagram.com/naruse_dentalclinic/"
+          target="_blank"
+          rel="noopener"
+        >
+          Instagram · @naruse_dentalclinic
+        </a>
+
+        <a
+          href="https://www.tiktok.com/@naruse_dentalclinic"
+          target="_blank"
+          rel="noopener"
+        >
+          TikTok · @naruse_dentalclinic
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div>
+
+      <h4>
+        Visit
+      </h4>
+
+      <div class="footer-links">
+
+        <span>
+          Pondok Candra, Sidoarjo
+        </span>
+
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=Jl.%20Taman%20Lestari%20RR1-02%20Pondok%20Candra%20Wadung%20Asri%20Sidoarjo"
+          target="_blank"
+          rel="noopener"
+        >
+          Google Maps →
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="copyright">
+
+    <span>
+      © 2026 Naruse Dental Clinic. All rights reserved.
+    </span>
+
+    <span>
+      Healthy smiles. Brighter days.
+    </span>
+
+  </div>
+
+</footer>
+
+
+</body>
+</html>
