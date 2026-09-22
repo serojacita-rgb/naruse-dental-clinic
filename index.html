@@ -1,529 +1,1545 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Naruse Dental Clinic — Healthy Smiles, Brighter Days.">
-  <title>Naruse Dental Clinic</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:wght@500;600&display=swap');
+<meta name="description" content="Naruse Dental Clinic — Modern dental care in Sidoarjo. Healthy smiles, brighter days.">
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<title>Naruse Dental Clinic | Sidoarjo</title>
 
-    html {
-      scroll-behavior: smooth;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      color: #202020;
-      background: #f8f7f4;
-      line-height: 1.7;
-    }
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+<style>
 
-    .container {
-      width: min(1100px, 90%);
-      margin: auto;
-    }
+:root{
+  --ivory:#f8f6f1;
+  --cream:#eeeae1;
+  --sage:#7c8d7d;
+  --sage-dark:#536457;
+  --ink:#253029;
+  --muted:#747a74;
+  --white:#ffffff;
+  --line:rgba(37,48,41,.12);
+  --gold:#b59a6a;
+}
 
-    /* NAVIGATION */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      background: rgba(248,247,244,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    .nav-inner {
-      height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      letter-spacing: 1px;
-    }
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--ivory);
+  color:var(--ink);
+  line-height:1.7;
+  overflow-x:hidden;
+}
 
-    .nav-links {
-      display: flex;
-      gap: 30px;
-      font-size: 14px;
-    }
+a{
+  text-decoration:none;
+  color:inherit;
+}
 
-    .nav-links a {
-      transition: opacity .3s;
-    }
+img{
+  max-width:100%;
+  display:block;
+}
 
-    .nav-links a:hover {
-      opacity: .55;
-    }
+/* ================= HEADER ================= */
 
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 80% 30%, rgba(210,205,194,.5), transparent 30%),
-        #f8f7f4;
-    }
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:1000;
+  transition:.35s ease;
+  padding:22px 6%;
+}
 
-    .hero-content {
-      max-width: 720px;
-      padding-top: 60px;
-    }
+header.scrolled{
+  background:rgba(248,246,241,.92);
+  backdrop-filter:blur(16px);
+  padding:15px 6%;
+  box-shadow:0 8px 30px rgba(37,48,41,.06);
+}
 
-    .eyebrow {
-      font-size: 12px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #777;
-      margin-bottom: 22px;
-    }
+.nav{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(48px, 8vw, 86px);
-      line-height: 1.05;
-      font-weight: 500;
-      letter-spacing: -2px;
-      margin-bottom: 28px;
-    }
+.logo{
+  font-family:'Playfair Display',serif;
+  font-size:25px;
+  letter-spacing:.08em;
+  font-weight:500;
+}
 
-    .hero p {
-      max-width: 520px;
-      font-size: 17px;
-      color: #666;
-      margin-bottom: 36px;
-    }
+.logo span{
+  display:block;
+  font-family:'DM Sans',sans-serif;
+  font-size:8px;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  margin-top:-3px;
+  color:var(--sage-dark);
+}
 
-    .button {
-      display: inline-block;
-      background: #202020;
-      color: white;
-      padding: 14px 28px;
-      border-radius: 40px;
-      font-size: 14px;
-      transition: all .3s;
-    }
+.nav-links{
+  display:flex;
+  gap:34px;
+  align-items:center;
+  font-size:13px;
+}
 
-    .button:hover {
-      transform: translateY(-2px);
-      background: #444;
-    }
+.nav-links a{
+  position:relative;
+}
 
-    /* SECTIONS */
-    section {
-      padding: 110px 0;
-    }
+.nav-links a:after{
+  content:"";
+  position:absolute;
+  bottom:-6px;
+  left:0;
+  width:0;
+  height:1px;
+  background:var(--sage-dark);
+  transition:.3s;
+}
 
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #888;
-      margin-bottom: 15px;
-    }
+.nav-links a:hover:after{
+  width:100%;
+}
 
-    h2 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 500;
-      font-size: clamp(34px, 5vw, 54px);
-      line-height: 1.2;
-      margin-bottom: 25px;
-    }
+.nav-button{
+  background:var(--sage-dark);
+  color:white;
+  padding:12px 20px;
+  border-radius:30px;
+  font-size:12px;
+  transition:.3s;
+}
 
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
+.nav-button:hover{
+  transform:translateY(-2px);
+  background:var(--ink);
+}
 
-    .about-text p {
-      color: #666;
-      margin-bottom: 18px;
-    }
+/* ================= HERO ================= */
 
-    .quote {
-      font-family: 'Playfair Display', serif;
-      font-size: 27px;
-      line-height: 1.5;
-    }
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  position:relative;
+  padding:130px 6% 80px;
+  overflow:hidden;
+}
 
-    /* SERVICES */
-    .services {
-      background: #eeece7;
-    }
+.hero:before{
+  content:"";
+  position:absolute;
+  width:650px;
+  height:650px;
+  border-radius:50%;
+  background:var(--cream);
+  right:-220px;
+  top:-170px;
+  z-index:-1;
+}
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: #d5d2cb;
-      margin-top: 50px;
-    }
+.hero:after{
+  content:"";
+  position:absolute;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  background:#e1e8df;
+  left:-130px;
+  bottom:-100px;
+  z-index:-1;
+}
 
-    .service {
-      background: #eeece7;
-      padding: 42px;
-      min-height: 210px;
-    }
+.hero-inner{
+  width:100%;
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:70px;
+  align-items:center;
+}
 
-    .service-number {
-      font-size: 12px;
-      color: #999;
-      margin-bottom: 30px;
-    }
+.eyebrow{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:var(--sage-dark);
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  font-size:10px;
+  font-weight:600;
+  margin-bottom:24px;
+}
 
-    .service h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 25px;
-      font-weight: 500;
-      margin-bottom: 12px;
-    }
+.eyebrow:before{
+  content:"";
+  width:34px;
+  height:1px;
+  background:var(--gold);
+}
 
-    .service p {
-      color: #6c6c6c;
-      font-size: 14px;
-    }
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(50px,7vw,88px);
+  line-height:1.02;
+  font-weight:400;
+  letter-spacing:-.03em;
+  max-width:700px;
+}
 
-    /* DENTIST */
-    .dentist-card {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 70px;
-      align-items: center;
-    }
+.hero h1 em{
+  color:var(--sage-dark);
+  font-style:normal;
+}
 
-    .dentist-image {
-      min-height: 430px;
-      background: linear-gradient(145deg, #dedbd4, #f1efe9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      color: #777;
-    }
+.hero-text{
+  max-width:500px;
+  margin-top:28px;
+  color:var(--muted);
+  font-size:15px;
+}
 
-    .dentist-info p {
-      color: #666;
-      margin-bottom: 20px;
-    }
+.hero-actions{
+  display:flex;
+  gap:14px;
+  margin-top:34px;
+  flex-wrap:wrap;
+}
 
-    /* LOCATION */
-    .location {
-      background: #202020;
-      color: white;
-    }
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:15px 25px;
+  border-radius:40px;
+  font-size:12px;
+  font-weight:600;
+  transition:.3s;
+}
 
-    .location .section-label {
-      color: #aaa;
-    }
+.btn-primary{
+  background:var(--sage-dark);
+  color:white;
+  box-shadow:0 12px 30px rgba(83,100,87,.2);
+}
 
-    .location-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 70px;
-    }
+.btn-primary:hover{
+  transform:translateY(-3px);
+  box-shadow:0 16px 35px rgba(83,100,87,.28);
+}
 
-    .location p {
-      color: #bbb;
-      margin-bottom: 12px;
-    }
+.btn-outline{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.5);
+}
 
-    .location .button {
-      background: white;
-      color: #202020;
-      margin-top: 20px;
-    }
+.btn-outline:hover{
+  background:white;
+  transform:translateY(-3px);
+}
 
-    /* FOOTER */
-    footer {
-      background: #202020;
-      color: #888;
-      border-top: 1px solid #333;
-      padding: 28px 0;
-      font-size: 12px;
-    }
+.hero-card{
+  position:relative;
+  height:560px;
+  border-radius:170px 170px 24px 24px;
+  background:
+    linear-gradient(145deg,#dce3dc,#f2eee6);
+  overflow:hidden;
+  box-shadow:0 30px 70px rgba(37,48,41,.12);
+}
 
-    footer .container {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-    }
+.hero-card:before{
+  content:"";
+  position:absolute;
+  width:250px;
+  height:250px;
+  border-radius:50%;
+  border:1px solid rgba(83,100,87,.25);
+  top:65px;
+  left:50%;
+  transform:translateX(-50%);
+}
 
-    /* MOBILE */
-    @media (max-width: 700px) {
-      .nav-inner {
-        height: 68px;
-      }
+.hero-card:after{
+  content:"✦";
+  position:absolute;
+  font-size:130px;
+  color:rgba(83,100,87,.08);
+  right:25px;
+  bottom:-5px;
+}
 
-      .nav-links {
-        display: none;
-      }
+.hero-center{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
 
-      .hero {
-        min-height: 90vh;
-      }
+.tooth-mark{
+  width:130px;
+  height:150px;
+  border:2px solid var(--sage-dark);
+  border-radius:50% 50% 46% 46%;
+  transform:rotate(45deg);
+  opacity:.75;
+  position:relative;
+}
 
-      .hero-content {
-        padding-top: 40px;
-      }
+.tooth-mark:after{
+  content:"";
+  position:absolute;
+  width:35px;
+  height:50px;
+  border-left:2px solid var(--sage-dark);
+  border-bottom:2px solid var(--sage-dark);
+  bottom:-20px;
+  left:45px;
+  border-radius:0 0 20px 20px;
+}
 
-      h1 {
-        font-size: 52px;
-      }
+.hero-card-caption{
+  position:absolute;
+  bottom:28px;
+  left:28px;
+  right:28px;
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(12px);
+  border-radius:18px;
+  padding:18px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-      section {
-        padding: 80px 0;
-      }
+.hero-card-caption small{
+  display:block;
+  font-size:9px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
 
-      .about-grid,
-      .dentist-card,
-      .location-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
+.hero-card-caption strong{
+  font-family:'Playfair Display',serif;
+  font-size:18px;
+  font-weight:500;
+}
 
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
+/* ================= MARQUEE ================= */
 
-      .service {
-        padding: 32px;
-      }
+.marquee{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:16px 0;
+  overflow:hidden;
+  white-space:nowrap;
+  background:#f3f0e9;
+}
 
-      .dentist-image {
-        min-height: 300px;
-      }
+.marquee-inner{
+  display:inline-flex;
+  gap:50px;
+  animation:scroll 25s linear infinite;
+  color:var(--sage-dark);
+  text-transform:uppercase;
+  font-size:10px;
+  letter-spacing:.25em;
+}
 
-      footer .container {
-        flex-direction: column;
-      }
-    }
-  </style>
+@keyframes scroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+/* ================= GENERAL ================= */
+
+section{
+  padding:110px 6%;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+}
+
+.section-label{
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  font-size:10px;
+  color:var(--sage-dark);
+  margin-bottom:15px;
+  font-weight:600;
+}
+
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(38px,5vw,58px);
+  line-height:1.1;
+  font-weight:400;
+}
+
+.section-intro{
+  max-width:560px;
+  color:var(--muted);
+  margin-top:18px;
+}
+
+/* ================= ABOUT ================= */
+
+.about{
+  background:white;
+}
+
+.about-grid{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:100px;
+  align-items:center;
+}
+
+.about-number{
+  font-family:'Playfair Display',serif;
+  font-size:150px;
+  line-height:1;
+  color:#e5e9e3;
+}
+
+.about-content p{
+  color:var(--muted);
+  margin:25px 0;
+}
+
+.signature{
+  margin-top:30px;
+}
+
+.signature strong{
+  font-family:'Playfair Display',serif;
+  font-size:22px;
+  font-weight:500;
+}
+
+.signature span{
+  display:block;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  color:var(--sage-dark);
+}
+
+/* ================= SERVICES ================= */
+
+.services{
+  background:var(--ivory);
+}
+
+.services-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:30px;
+  margin-bottom:55px;
+}
+
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.service{
+  background:white;
+  border:1px solid rgba(37,48,41,.07);
+  border-radius:22px;
+  padding:34px;
+  min-height:245px;
+  transition:.35s;
+  position:relative;
+  overflow:hidden;
+}
+
+.service:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 45px rgba(37,48,41,.09);
+}
+
+.service-number{
+  font-family:'Playfair Display',serif;
+  color:var(--gold);
+  font-size:13px;
+}
+
+.service h3{
+  font-family:'Playfair Display',serif;
+  font-size:25px;
+  font-weight:500;
+  margin:35px 0 12px;
+}
+
+.service p{
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* ================= PHILOSOPHY ================= */
+
+.philosophy{
+  background:var(--sage-dark);
+  color:white;
+  position:relative;
+  overflow:hidden;
+}
+
+.philosophy:before{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:50%;
+  right:-180px;
+  top:-180px;
+}
+
+.philosophy .section-label{
+  color:#d9c89f;
+}
+
+.philosophy h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(42px,6vw,72px);
+  font-weight:400;
+  max-width:900px;
+  line-height:1.1;
+}
+
+.philosophy h2 em{
+  color:#d9c89f;
+}
+
+.philosophy-text{
+  max-width:570px;
+  margin-top:28px;
+  color:rgba(255,255,255,.7);
+}
+
+/* ================= WHY US ================= */
+
+.why-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:center;
+}
+
+.features{
+  margin-top:35px;
+}
+
+.feature{
+  display:flex;
+  gap:20px;
+  padding:22px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.feature-icon{
+  width:42px;
+  height:42px;
+  flex-shrink:0;
+  border-radius:50%;
+  background:#e6ebe5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--sage-dark);
+}
+
+.feature h4{
+  font-size:14px;
+  margin-bottom:4px;
+}
+
+.feature p{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.quote-card{
+  background:#e9e5db;
+  min-height:470px;
+  border-radius:25px;
+  padding:55px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.quote-mark{
+  font-family:'Playfair Display',serif;
+  font-size:80px;
+  color:var(--gold);
+  line-height:.6;
+}
+
+.quote-card blockquote{
+  font-family:'Playfair Display',serif;
+  font-size:32px;
+  line-height:1.3;
+  margin:30px 0;
+}
+
+.quote-card small{
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:9px;
+  color:var(--sage-dark);
+}
+
+/* ================= APPOINTMENT ================= */
+
+.appointment{
+  background:white;
+}
+
+.appointment-box{
+  background:var(--ink);
+  color:white;
+  border-radius:30px;
+  padding:70px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:50px;
+  align-items:center;
+  overflow:hidden;
+  position:relative;
+}
+
+.appointment-box:after{
+  content:"";
+  position:absolute;
+  width:350px;
+  height:350px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:50%;
+  right:-130px;
+  top:-150px;
+}
+
+.appointment-box .section-label{
+  color:#d9c89f;
+}
+
+.appointment-box h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(38px,5vw,58px);
+  font-weight:400;
+  line-height:1.1;
+}
+
+.appointment-box p{
+  color:rgba(255,255,255,.65);
+  max-width:550px;
+  margin-top:18px;
+}
+
+.appointment-button{
+  background:#f8f6f1;
+  color:var(--ink);
+  padding:17px 27px;
+  border-radius:40px;
+  font-size:12px;
+  font-weight:600;
+  position:relative;
+  z-index:2;
+  white-space:nowrap;
+  transition:.3s;
+}
+
+.appointment-button:hover{
+  transform:translateY(-3px);
+}
+
+/* ================= LOCATION ================= */
+
+.location{
+  background:var(--ivory);
+}
+
+.location-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+}
+
+.location-card{
+  margin-top:35px;
+}
+
+.location-item{
+  padding:20px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.location-item span{
+  display:block;
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  font-size:9px;
+  color:var(--sage-dark);
+  margin-bottom:5px;
+}
+
+.location-item strong{
+  font-size:14px;
+  font-weight:500;
+}
+
+.map-box{
+  min-height:400px;
+  border-radius:25px;
+  background:
+    linear-gradient(rgba(124,141,125,.1) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(124,141,125,.1) 1px,transparent 1px),
+    #e9e6dd;
+  background-size:45px 45px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.map-pin{
+  width:70px;
+  height:70px;
+  background:var(--sage-dark);
+  border-radius:50% 50% 50% 0;
+  transform:rotate(-45deg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 15px 35px rgba(37,48,41,.2);
+}
+
+.map-pin span{
+  transform:rotate(45deg);
+  color:white;
+  font-size:25px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  background:#202a24;
+  color:white;
+  padding:70px 6% 30px;
+}
+
+.footer-grid{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr;
+  gap:60px;
+}
+
+.footer-logo{
+  font-family:'Playfair Display',serif;
+  font-size:30px;
+}
+
+.footer-description{
+  max-width:330px;
+  color:rgba(255,255,255,.55);
+  font-size:12px;
+  margin-top:18px;
+}
+
+.footer-title{
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:#d9c89f;
+  margin-bottom:18px;
+}
+
+.footer-links a{
+  display:block;
+  color:rgba(255,255,255,.65);
+  font-size:12px;
+  margin:9px 0;
+  transition:.2s;
+}
+
+.footer-links a:hover{
+  color:white;
+}
+
+.footer-bottom{
+  max-width:1200px;
+  margin:60px auto 0;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,.1);
+  display:flex;
+  justify-content:space-between;
+  color:rgba(255,255,255,.35);
+  font-size:10px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:850px){
+
+  header{
+    padding:17px 5%;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .nav-button{
+    padding:10px 16px;
+  }
+
+  .hero{
+    padding:125px 6% 70px;
+  }
+
+  .hero-inner{
+    grid-template-columns:1fr;
+    gap:50px;
+  }
+
+  .hero h1{
+    font-size:54px;
+  }
+
+  .hero-card{
+    height:440px;
+    border-radius:130px 130px 20px 20px;
+  }
+
+  section{
+    padding:80px 6%;
+  }
+
+  .about-grid,
+  .why-grid,
+  .location-grid{
+    grid-template-columns:1fr;
+    gap:45px;
+  }
+
+  .about-number{
+    font-size:100px;
+  }
+
+  .services-header{
+    display:block;
+  }
+
+  .services-grid{
+    grid-template-columns:1fr;
+  }
+
+  .service{
+    min-height:220px;
+  }
+
+  .quote-card{
+    min-height:370px;
+    padding:38px;
+  }
+
+  .quote-card blockquote{
+    font-size:27px;
+  }
+
+  .appointment-box{
+    grid-template-columns:1fr;
+    padding:45px 30px;
+  }
+
+  .appointment-button{
+    width:max-content;
+  }
+
+  .map-box{
+    min-height:300px;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr;
+    gap:35px;
+  }
+
+  .footer-bottom{
+    display:block;
+    line-height:2;
+  }
+}
+
+</style>
 </head>
 
 <body>
 
-  <!-- NAVIGATION -->
-  <nav>
-    <div class="container nav-inner">
-      <a href="#home" class="logo">Naruse Dental Clinic</a>
+<!-- ================= HEADER ================= -->
 
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#dentist">Dentist</a>
-        <a href="#location">Location</a>
-      </div>
+<header id="header">
+  <nav class="nav">
+
+    <a href="#" class="logo">
+      Naruse
+      <span>Dental Clinic</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#philosophy">Philosophy</a>
+      <a href="#location">Location</a>
     </div>
+
+    <a class="nav-button"
+       href="https://wa.me/6282178276828"
+       target="_blank">
+       Book Appointment
+    </a>
+
   </nav>
+</header>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="container">
-      <div class="hero-content">
-        <div class="eyebrow">Naruse Dental Clinic</div>
 
-        <h1>Healthy Smiles,<br>Brighter Days.</h1>
+<!-- ================= HERO ================= -->
 
-        <p>
-          Thoughtful dental care in a calm, modern space —
-          where healthy smiles meet everyday confidence.
-        </p>
+<section class="hero">
 
-        <a href="#appointment" class="button">
-          Book an Appointment
-        </a>
-      </div>
-    </div>
-  </section>
+  <div class="hero-inner">
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="container about-grid">
+    <div>
 
-      <div>
-        <div class="section-label">01 — About</div>
-        <h2>Care that feels<br>personal.</h2>
+      <div class="eyebrow">
+        Sidoarjo · Indonesia
       </div>
 
-      <div class="about-text">
-        <p>
-          At Naruse Dental Clinic, we believe dental care should be
-          comfortable, thoughtful, and tailored to every individual.
-        </p>
+      <h1>
+        Healthy smiles.<br>
+        <em>Brighter days.</em>
+      </h1>
 
-        <p>
-          From preventive care to aesthetic treatments, we focus on
-          creating healthy smiles while making every visit feel calm
-          and welcoming.
-        </p>
-
-        <div class="quote">
-          “A healthy smile is a beautiful part of everyday life.”
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section class="services" id="services">
-    <div class="container">
-
-      <div class="section-label">02 — Services</div>
-      <h2>Dental care,<br>beautifully simple.</h2>
-
-      <div class="services-grid">
-
-        <div class="service">
-          <div class="service-number">01</div>
-          <h3>Preventive Care</h3>
-          <p>
-            Routine examinations, professional cleaning,
-            oral hygiene education, and prevention.
-          </p>
-        </div>
-
-        <div class="service">
-          <div class="service-number">02</div>
-          <h3>Restorative Dentistry</h3>
-          <p>
-            Gentle treatment to restore the function
-            and health of damaged teeth.
-          </p>
-        </div>
-
-        <div class="service">
-          <div class="service-number">03</div>
-          <h3>Aesthetic Dentistry</h3>
-          <p>
-            Personalized treatments designed to create
-            a natural and confident smile.
-          </p>
-        </div>
-
-        <div class="service">
-          <div class="service-number">04</div>
-          <h3>Family Dentistry</h3>
-          <p>
-            Comfortable dental care for patients
-            of different ages and needs.
-          </p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- DENTIST -->
-  <section id="dentist">
-    <div class="container">
-
-      <div class="section-label">03 — Dentist</div>
-
-      <div class="dentist-card">
-
-        <div class="dentist-image">
-          Your Dentist
-        </div>
-
-        <div class="dentist-info">
-          <h2>Meet your<br>dentist.</h2>
-
-          <p>
-            Providing thoughtful, evidence-based dental care
-            with a gentle and patient-centered approach.
-          </p>
-
-          <p>
-            <strong>Dr. [drg. Kurnia Ramadhani Mujiono], drg.</strong><br>
-            Dentist
-          </p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- LOCATION -->
-  <section class="location" id="location">
-    <div class="container location-grid">
-
-      <div>
-        <div class="section-label">04 — Location</div>
-        <h2>Find us.</h2>
-      </div>
-
-      <div>
-        <p><strong>Naruse Dental Clinic</strong></p>
-        <p>
-          [Jl Taman Lestari RR1-02 
-Pondok Candra  Wadung Asri Sidoarjo]<br>
-          [Sidoarjo], Indonesia
-        </p>
-
-        <a href="#" class="button">
-          View on Google Maps
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- APPOINTMENT -->
-  <section id="appointment">
-    <div class="container" style="text-align:center;">
-
-      <div class="section-label">05 — Appointment</div>
-
-      <h2>Ready for your<br>next smile?</h2>
-
-      <p style="color:#666; margin-bottom:30px;">
-        Schedule your visit with Naruse Dental Clinic.
+      <p class="hero-text">
+        Contemporary dental care designed around comfort,
+        confidence, and a naturally beautiful smile.
       </p>
 
-      <!-- GANTI NOMOR WHATSAPP DI BAWAH -->
-      <a
-        href="https://wa.me/6282178276828"
-        class="button"
-        target="_blank">
-        Contact via WhatsApp
+      <div class="hero-actions">
+
+        <a class="btn btn-primary"
+           href="https://wa.me/6282178276828"
+           target="_blank">
+           Book an Appointment
+        </a>
+
+        <a class="btn btn-outline" href="#services">
+           Explore Services
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="hero-card">
+
+      <div class="hero-center">
+        <div class="tooth-mark"></div>
+      </div>
+
+      <div class="hero-card-caption">
+
+        <div>
+          <small>Private Dental Care</small>
+          <strong>Naruse Dental Clinic</strong>
+        </div>
+
+        <div>✦</div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= MARQUEE ================= -->
+
+<div class="marquee">
+
+  <div class="marquee-inner">
+
+    <span>Healthy Smiles</span>
+    <span>✦</span>
+    <span>Modern Dentistry</span>
+    <span>✦</span>
+    <span>Gentle Care</span>
+    <span>✦</span>
+    <span>Confident Smiles</span>
+    <span>✦</span>
+
+    <span>Healthy Smiles</span>
+    <span>✦</span>
+    <span>Modern Dentistry</span>
+    <span>✦</span>
+    <span>Gentle Care</span>
+    <span>✦</span>
+    <span>Confident Smiles</span>
+    <span>✦</span>
+
+  </div>
+
+</div>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about" id="about">
+
+  <div class="container about-grid">
+
+    <div>
+      <div class="about-number">01</div>
+    </div>
+
+    <div class="about-content">
+
+      <div class="section-label">
+        The Naruse Approach
+      </div>
+
+      <h2 class="section-title">
+        Dentistry with<br>
+        intention.
+      </h2>
+
+      <p>
+        At Naruse Dental Clinic, we believe dental care should feel
+        personal, calm, and considered. Every visit is designed to
+        make you feel comfortable while receiving thoughtful,
+        contemporary dental care.
+      </p>
+
+      <p>
+        From preventive care to restorative treatments, our focus is
+        simple: healthy teeth, confident smiles, and a better
+        experience at the dentist.
+      </p>
+
+      <div class="signature">
+        <strong>drg. Kurnia Ramadhani Mujiono</strong>
+        <span>General Dentist · Naruse Dental Clinic</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= SERVICES ================= -->
+
+<section class="services" id="services">
+
+  <div class="container">
+
+    <div class="services-header">
+
+      <div>
+        <div class="section-label">Our Services</div>
+
+        <h2 class="section-title">
+          Care for every<br>
+          stage of your smile.
+        </h2>
+      </div>
+
+      <p class="section-intro">
+        Comprehensive dental care with a gentle,
+        modern approach tailored to your needs.
+      </p>
+
+    </div>
+
+
+    <div class="services-grid">
+
+      <div class="service">
+
+        <span class="service-number">01</span>
+
+        <h3>Dental Check-Up</h3>
+
+        <p>
+          Comprehensive examination to understand
+          your oral health and identify concerns early.
+        </p>
+
+      </div>
+
+
+      <div class="service">
+
+        <span class="service-number">02</span>
+
+        <h3>Teeth Cleaning</h3>
+
+        <p>
+          Professional cleaning to maintain a fresh,
+          healthy and comfortable smile.
+        </p>
+
+      </div>
+
+
+      <div class="service">
+
+        <span class="service-number">03</span>
+
+        <h3>Restorative Care</h3>
+
+        <p>
+          Thoughtful treatment for damaged or decayed
+          teeth while preserving natural structure.
+        </p>
+
+      </div>
+
+
+      <div class="service">
+
+        <span class="service-number">04</span>
+
+        <h3>Dental Filling</h3>
+
+        <p>
+          Restore teeth affected by decay with
+          functional and aesthetic considerations.
+        </p>
+
+      </div>
+
+
+      <div class="service">
+
+        <span class="service-number">05</span>
+
+        <h3>Preventive Dentistry</h3>
+
+        <p>
+          Personalized guidance to help maintain
+          healthy teeth and gums for the long term.
+        </p>
+
+      </div>
+
+
+      <div class="service">
+
+        <span class="service-number">06</span>
+
+        <h3>Personal Consultation</h3>
+
+        <p>
+          A calm space to discuss your concerns,
+          treatment options and dental goals.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= PHILOSOPHY ================= -->
+
+<section class="philosophy" id="philosophy">
+
+  <div class="container">
+
+    <div class="section-label">
+      Our Philosophy
+    </div>
+
+    <h2>
+      A beautiful smile begins
+      with <em>healthy teeth.</em>
+    </h2>
+
+    <p class="philosophy-text">
+      We combine clinical precision with a warm,
+      human approach — because good dentistry is not
+      only about the treatment, but also about how
+      you feel throughout the experience.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- ================= WHY ================= -->
+
+<section>
+
+  <div class="container why-grid">
+
+    <div>
+
+      <div class="section-label">
+        Why Naruse
+      </div>
+
+      <h2 class="section-title">
+        Thoughtful care,<br>
+        beautifully simple.
+      </h2>
+
+
+      <div class="features">
+
+        <div class="feature">
+
+          <div class="feature-icon">✦</div>
+
+          <div>
+            <h4>Personalized Care</h4>
+            <p>
+              Treatment begins by understanding
+              your individual needs.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="feature">
+
+          <div class="feature-icon">♡</div>
+
+          <div>
+            <h4>Comfort First</h4>
+            <p>
+              A calm environment designed to make
+              dental visits feel less intimidating.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="feature">
+
+          <div class="feature-icon">＋</div>
+
+          <div>
+            <h4>Modern Approach</h4>
+            <p>
+              Contemporary dental care with
+              attention to detail.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="feature">
+
+          <div class="feature-icon">◌</div>
+
+          <div>
+            <h4>Preventive Focus</h4>
+            <p>
+              Helping you maintain your smile,
+              not only treating problems.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="quote-card">
+
+      <div class="quote-mark">“</div>
+
+      <blockquote>
+        Your smile deserves
+        thoughtful care.
+      </blockquote>
+
+      <small>
+        Naruse Dental Clinic
+      </small>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= APPOINTMENT ================= -->
+
+<section class="appointment">
+
+  <div class="container">
+
+    <div class="appointment-box">
+
+      <div>
+
+        <div class="section-label">
+          Your next visit
+        </div>
+
+        <h2>
+          Ready for a<br>
+          healthier smile?
+        </h2>
+
+        <p>
+          Schedule your visit with Naruse Dental Clinic.
+          We currently welcome patients by appointment.
+        </p>
+
+      </div>
+
+      <a class="appointment-button"
+         href="https://wa.me/6282178276828?text=Halo%20Naruse%20Dental%20Clinic%2C%20saya%20ingin%20membuat%20appointment."
+         target="_blank">
+
+         WhatsApp Us →
+
       </a>
 
     </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <span>© 2026 Naruse Dental Clinic</span>
-      <span>Healthy Smiles, Brighter Days.</span>
+  </div>
+
+</section>
+
+
+<!-- ================= LOCATION ================= -->
+
+<section class="location" id="location">
+
+  <div class="container location-grid">
+
+    <div>
+
+      <div class="section-label">
+        Visit Us
+      </div>
+
+      <h2 class="section-title">
+        Find us<br>
+        in Sidoarjo.
+      </h2>
+
+      <div class="location-card">
+
+        <div class="location-item">
+
+          <span>Address</span>
+
+          <strong>
+            Jl. Taman Lestari RR1-02<br>
+            Pondok Candra, Wadung Asri<br>
+            Sidoarjo, Jawa Timur
+          </strong>
+
+        </div>
+
+
+        <div class="location-item">
+
+          <span>Appointments</span>
+
+          <strong>
+            By appointment
+          </strong>
+
+        </div>
+
+
+        <div class="location-item">
+
+          <span>WhatsApp</span>
+
+          <strong>
+            0821 7827 6828
+          </strong>
+
+        </div>
+
+
+        <div class="location-item">
+
+          <span>Instagram</span>
+
+          <strong>
+            @naruse_dentalklinik
+          </strong>
+
+        </div>
+
+      </div>
+
     </div>
-  </footer>
+
+
+    <div class="map-box">
+
+      <div class="map-pin">
+        <span>+</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+  <div class="footer-grid">
+
+    <div>
+
+      <div class="footer-logo">
+        Naruse Dental Clinic
+      </div>
+
+      <p class="footer-description">
+        Modern dental care with a calm,
+        personal and thoughtful approach.
+      </p>
+
+    </div>
+
+
+    <div>
+
+      <div class="footer-title">
+        Explore
+      </div>
+
+      <div class="footer-links">
+
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#philosophy">Philosophy</a>
+        <a href="#location">Location</a>
+
+      </div>
+
+    </div>
+
+
+    <div>
+
+      <div class="footer-title">
+        Connect
+      </div>
+
+      <div class="footer-links">
+
+        <a href="https://wa.me/6282178276828" target="_blank">
+          WhatsApp
+        </a>
+
+        <a href="https://instagram.com/naruse_dentalklinik" target="_blank">
+          Instagram
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer-bottom">
+
+    <span>
+      © 2026 Naruse Dental Clinic
+    </span>
+
+    <span>
+      Healthy smiles. Brighter days.
+    </span>
+
+  </div>
+
+</footer>
+
+
+<script>
+
+window.addEventListener("scroll", function(){
+
+  const header = document.getElementById("header");
+
+  if(window.scrollY > 30){
+    header.classList.add("scrolled");
+  }else{
+    header.classList.remove("scrolled");
+  }
+
+});
+
+</script>
 
 </body>
 </html>
